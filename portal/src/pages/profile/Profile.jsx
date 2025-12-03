@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useCallback } from 'react';
 import clsx from 'clsx';
+import { getAttributeValue } from '../../helpers/records.js';
 import { updateProfile } from '@kineticdata/react';
 import { Avatar } from '../../atoms/Avatar.jsx';
 import { Icon } from '../../atoms/Icon.jsx';
@@ -21,6 +22,8 @@ export const Profile = () => {
     newDisplayName: '',
     newPassword: '',
   });
+  const [volunteerId] = useState(getAttributeValue(profile, "Volunteer Id"));
+  const isVolunteer = volunteerId ? "true" : "false";
 
   const saveProfile = useCallback(
     async e => {
@@ -84,6 +87,7 @@ export const Profile = () => {
                 'has-error': validationErrors.newEmail,
               })}
             >
+                <p>Is Volunteer: {isVolunteer}</p>
               <label htmlFor="email">Email</label>
               <input
                 id="email"

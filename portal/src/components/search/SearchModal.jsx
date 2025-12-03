@@ -217,7 +217,7 @@ export const SearchModal = () => {
         </div>
       )}
       <div slot="body" className="flex-c-st gap-3">
-        {!currentCategory && (
+        {/* {!currentCategory && (
           <label className="kinput w-full">
             <input
               type="text"
@@ -230,7 +230,7 @@ export const SearchModal = () => {
             />
             <Icon name="search" size={20} />
           </label>
-        )}
+        )} */}
         {(searchOnly || searchData.initialized) && !currentCategory ? (
           <>
             <div className="text-2xl font-semibold mt-6">Search Results</div>
@@ -274,7 +274,7 @@ export const SearchModal = () => {
           <>
             {currentCategories?.length > 0 && (
               <>
-                <div className="text-2xl font-semibold mt-6">Categories</div>
+                {/* <div className="text-2xl font-semibold mt-6">Categories</div> */}
                 <div className="relative">
                   {currentCategoryIndex !== 0 && (
                     <button
@@ -327,7 +327,7 @@ export const SearchModal = () => {
               </>
             )}
 
-            {!currentCategory && popularForms?.length > 0 && (
+            {/* {!currentCategory && popularForms?.length > 0 && (
               <>
                 <div className="text-2xl font-semibold mt-6">Popular</div>
                 <ul className="klist text-base p-3 border rounded-box">
@@ -336,7 +336,7 @@ export const SearchModal = () => {
                   ))}
                 </ul>
               </>
-            )}
+            )} */}
 
             {(currentCategory || !hasCategories) && (
               <>

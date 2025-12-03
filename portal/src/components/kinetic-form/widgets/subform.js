@@ -83,7 +83,14 @@ SubformComponent.propTypes = {
     t.shape({
       label: t.string,
       property: t.string.isRequired,
-      type: t.oneOf(['text', 'checkbox', 'date', 'datetime', 'time']),
+      type: t.oneOf([
+        'text',
+        'checkbox',
+        'date',
+        'datetime',
+        'time',
+        'dropdown',
+      ]),
       defaultValue: t.any,
       required: t.bool,
       disabled: t.bool,
@@ -252,6 +259,7 @@ const getDefaultValueForType = type => {
     case 'date':
     case 'datetime':
     case 'time':
+    case 'dropdown':
       return '';
     case 'checkbox':
       return false;
@@ -310,6 +318,38 @@ const CheckboxField = ({ label, value, required, disabled, onChange }) => {
   );
 };
 
+const DropdownField = ({
+  label,
+  value,
+  required,
+  disabled,
+  onChange,
+  options,
+}) => {
+  const id = useMemo(() => generateKey(12), []);
+  return (
+    <div className={clsx('field', { required })}>
+      <Label label={label} id={id} required={required} />
+      <select
+        id={id}
+        value={value}
+        onChange={e => onChange(e.target.value)}
+        required={!!required}
+        disabled={!!disabled}
+      >
+        <>
+        <option/>
+        {options.map(option => (
+          <option key={option.value} value={option.value}>
+            {option.label ? option.label : option.value}
+          </option>
+        ))}
+        </>
+      </select>
+    </div>
+  );
+};
+
 const getFieldRendererForType = type => {
   switch (type) {
     case 'text':
@@ -322,6 +362,8 @@ const getFieldRendererForType = type => {
       return TimeField;
     case 'checkbox':
       return CheckboxField;
+    case 'dropdown':
+      return DropdownField;
     default:
       return null;
   }

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-import logo from '../../assets/images/logo.svg';
+import logo from '../../assets/images/logo.png';
 
 export const LoginCardWrapper = ({ children }) => (
   <div className="flex-cc min-h-screen">
@@ -27,12 +27,13 @@ export const Login = loginProps => {
 
   return (
     <LoginCardWrapper>
-      <form className="flex-c-st gap-5 w-full max-w-96">
+      <form className="flex-c-st gap-5 w-full max-w-98">
         <img
           src={themeLogo || logo}
           alt="Logo"
           className="logo my-5 self-center"
         />
+        <h1>Login</h1>
         <div className="field">
           <label htmlFor="username">Username</label>
           <input
@@ -70,6 +71,14 @@ export const Login = loginProps => {
         >
           Sign In
         </button>
+        <Link
+          to="/create-account"
+          className={clsx(
+            'kbtn kbtn-secondary kbtn-lg',
+          )}
+        >
+          Create Account
+        </Link>
         {onSso && (
           <>
             <div className="flex justify-center items-center gap-2.5 text-base-content/60 font-semibold leading-4">

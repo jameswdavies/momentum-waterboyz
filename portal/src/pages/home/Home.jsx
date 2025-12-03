@@ -38,7 +38,7 @@ export const Home = () => {
                   className="kbtn kbtn-primary kbtn-xl flex-1"
                   onClick={() => openSearch()}
                 >
-                  Submit a Request
+                  Get Started
                 </button>
                 <Link
                   to="/requests"

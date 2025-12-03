@@ -525,97 +525,99 @@ const TableRenderer = ({
         </table>
       </div>
 
-      <div
-        className={clsx(
-          'flex-cc gap-2 lg:gap-5 bg-base-100 px-3 py-2.5 font-medium rounded-box',
-        )}
-      >
-        <span className="max-md:hidden flex-1 text-balance">
-          Showing: {queryValue ? `${filteredCount} of ${count}` : count}
-        </span>
-
-        <button
-          type="button"
-          className="kbtn kbtn-lg kbtn-ghost kbtn-circle ml-auto"
-          disabled={pageNumber <= 1}
-          onClick={() => goToPage(1)}
-          aria-label="Go to first page"
-        >
-          <Icon name="chevron-left-pipe" />
-        </button>
-        <button
-          type="button"
-          className="kbtn kbtn-lg kbtn-ghost kbtn-circle"
-          disabled={pageNumber <= 1}
-          onClick={() => goToPage(pageNumber - 1)}
-          aria-label="Go to previous page"
-        >
-          <Icon name="chevron-left" />
-        </button>
-        <Menu
-          items={Array.from(Array(pageCount).keys()).map(pageIndex => ({
-            label: `${pageIndex + 1}`,
-            onClick: () => goToPage(pageIndex + 1),
-          }))}
-          alignment="middle"
-        >
-          <button
-            slot="trigger"
-            type="button"
-            className="kbtn kbtn-lg kbtn-ghost rounded-full"
-            aria-label="Go To Page"
-          >
-            {currentTableData ? (
-              `${pageNumber}/${pageCount}`
-            ) : (
-              <Icon name="loader-2" className="animate-spin"></Icon>
-            )}
-          </button>
-        </Menu>
-        <button
-          type="button"
-          className="kbtn kbtn-lg kbtn-ghost kbtn-circle"
-          disabled={pageNumber >= pageCount}
-          onClick={() => goToPage(pageNumber + 1)}
-          aria-label="Go to next page"
-        >
-          <Icon name="chevron-right" />
-        </button>
-        <button
-          type="button"
-          className="kbtn kbtn-lg kbtn-ghost kbtn-circle mr-auto"
-          disabled={pageNumber >= pageCount}
-          onClick={() => goToPage(pageCount)}
-          aria-label="Go to last page"
-        >
-          <Icon name="chevron-right-pipe" />
-        </button>
-
-        <span className="max-md:hidden flex-1 text-right">
-          {pageSizes?.length > 1 && (
-            <>
-              Rows per page{' '}
-              <Menu
-                items={pageSizes.map(size => ({
-                  label: size ? `${size}` : 'All',
-                  onClick: () => setPageSize(size),
-                }))}
-                alignment="end"
-              >
-                <button
-                  slot="trigger"
-                  type="button"
-                  className="kbtn kbtn-lg kbtn-soft rounded-full"
-                  aria-label="Change Page Size"
-                >
-                  {pageSize || 'All'}
-                  <Icon name="chevron-down" />
-                </button>
-              </Menu>
-            </>
+      {pageSize > 0 && (
+        <div
+          className={clsx(
+            'flex-cc gap-2 lg:gap-5 bg-base-100 px-3 py-2.5 font-medium rounded-box',
           )}
-        </span>
-      </div>
+        >
+          <span className="max-md:hidden flex-1 text-balance">
+            Showing: {queryValue ? `${filteredCount} of ${count}` : count}
+          </span>
+
+          <button
+            type="button"
+            className="kbtn kbtn-lg kbtn-ghost kbtn-circle ml-auto"
+            disabled={pageNumber <= 1}
+            onClick={() => goToPage(1)}
+            aria-label="Go to first page"
+          >
+            <Icon name="chevron-left-pipe" />
+          </button>
+          <button
+            type="button"
+            className="kbtn kbtn-lg kbtn-ghost kbtn-circle"
+            disabled={pageNumber <= 1}
+            onClick={() => goToPage(pageNumber - 1)}
+            aria-label="Go to previous page"
+          >
+            <Icon name="chevron-left" />
+          </button>
+          <Menu
+            items={Array.from(Array(pageCount).keys()).map(pageIndex => ({
+              label: `${pageIndex + 1}`,
+              onClick: () => goToPage(pageIndex + 1),
+            }))}
+            alignment="middle"
+          >
+            <button
+              slot="trigger"
+              type="button"
+              className="kbtn kbtn-lg kbtn-ghost rounded-full"
+              aria-label="Go To Page"
+            >
+              {currentTableData ? (
+                `${pageNumber}/${pageCount}`
+              ) : (
+                <Icon name="loader-2" className="animate-spin"></Icon>
+              )}
+            </button>
+          </Menu>
+          <button
+            type="button"
+            className="kbtn kbtn-lg kbtn-ghost kbtn-circle"
+            disabled={pageNumber >= pageCount}
+            onClick={() => goToPage(pageNumber + 1)}
+            aria-label="Go to next page"
+          >
+            <Icon name="chevron-right" />
+          </button>
+          <button
+            type="button"
+            className="kbtn kbtn-lg kbtn-ghost kbtn-circle mr-auto"
+            disabled={pageNumber >= pageCount}
+            onClick={() => goToPage(pageCount)}
+            aria-label="Go to last page"
+          >
+            <Icon name="chevron-right-pipe" />
+          </button>
+
+          <span className="max-md:hidden flex-1 text-right">
+            {pageSizes?.length > 1 && (
+              <>
+                Rows per page{' '}
+                <Menu
+                  items={pageSizes.map(size => ({
+                    label: size ? `${size}` : 'All',
+                    onClick: () => setPageSize(size),
+                  }))}
+                  alignment="end"
+                >
+                  <button
+                    slot="trigger"
+                    type="button"
+                    className="kbtn kbtn-lg kbtn-soft rounded-full"
+                    aria-label="Change Page Size"
+                  >
+                    {pageSize || 'All'}
+                    <Icon name="chevron-down" />
+                  </button>
+                </Menu>
+              </>
+            )}
+          </span>
+        </div>
+      )}
       <div ref={formContainerRef} className="empty:hidden" />
     </div>
   );
